@@ -1,4 +1,4 @@
-package ru.job4j.condition.ru.job4j.condition;
+package ru.job4j.condition;
 
 public class CinemaPermission {
     public static void permission(boolean allowByParent, boolean hasMoney) {
