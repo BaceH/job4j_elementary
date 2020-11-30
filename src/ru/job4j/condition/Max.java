@@ -5,7 +5,6 @@ public class Max {
         System.out.println(max(2, 2));
     }
     public static int max(int left, int right) {
-        int result = left > right ? left : right;
-        return result;
+        return left > right ? left : right;
     }
 }
