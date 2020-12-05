@@ -2,11 +2,11 @@ package ru.job4j.array;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static ru.job4j.array.EqLast.check;
+import static ru.job4j.array.EqualsLast.check;
 
 import org.junit.Test;
 
-public class EqLastTest {
+public class EqualsLastTest {
 
     @Test
     public void whenEq() {
