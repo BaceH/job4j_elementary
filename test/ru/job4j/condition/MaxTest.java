@@ -18,8 +18,20 @@ public class MaxTest {
     }
 
     @Test
-    public void whenMaxeEuals() {
+    public void whenMaxEquals() {
         int result = Max.max(2, 2);
         assertThat(result, is(2));
+    }
+
+    @Test
+    public void whenMax3From3() {
+        int result = Max.max(2, 2, 5);
+        assertThat(result, is(5));
+    }
+
+    @Test
+    public void whenMax3From4() {
+        int result = Max.max(2, 4, 5, 1);
+        assertThat(result, is(5));
     }
 }
