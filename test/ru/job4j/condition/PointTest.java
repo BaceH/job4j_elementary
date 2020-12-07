@@ -39,4 +39,13 @@ public class PointTest {
         double out = a.distance(b);
         Assert.assertEquals(expected, out, 0.01);
     }
+
+    @Test
+    public void when000to020() {
+        int expected = 2;
+        Point a = new Point(0, 0, 0);
+        Point b = new Point(0,2, 0);
+        double out = a.distance3d(b);
+        Assert.assertEquals(expected, out, 0.01);
+    }
 }
