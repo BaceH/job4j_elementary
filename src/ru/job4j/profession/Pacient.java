@@ -1,7 +1,7 @@
 package ru.job4j.profession;
 
 public class Pacient {
-    Diagnosis diagnosis;
+    private Diagnosis diagnosis;
 
     public Diagnosis getDiagnosis() {
         return diagnosis;
