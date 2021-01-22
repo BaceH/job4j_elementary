@@ -10,9 +10,10 @@ public class ThreadState {
         );
         first.start();
         second.start();
-        while (true) {
-            if (first.getState() == Thread.State.TERMINATED && second.getState() == Thread.State.TERMINATED)
-                break;
+        while (first.getState() != Thread.State.TERMINATED && second.getState() != Thread.State.TERMINATED) {
+//            if (first.getState() == Thread.State.TERMINATED && second.getState() == Thread.State.TERMINATED)
+//                break;
+            System.out.println("weight");
         }
         System.out.println("работа завершена");
 
