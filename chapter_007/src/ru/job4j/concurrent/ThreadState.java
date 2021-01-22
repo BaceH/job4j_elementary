@@ -13,7 +13,7 @@ public class ThreadState {
         while (first.getState() != Thread.State.TERMINATED && second.getState() != Thread.State.TERMINATED) {
 //            if (first.getState() == Thread.State.TERMINATED && second.getState() == Thread.State.TERMINATED)
 //                break;
-            System.out.println("weight");
+            System.out.println("wait");
         }
         System.out.println("работа завершена");
 
