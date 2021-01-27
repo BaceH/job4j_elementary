@@ -25,9 +25,12 @@ public class Wget implements Runnable {
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                 long timeEnd = System.currentTimeMillis();
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
-                if ((timeEnd - timeStart) < this.speed){
+                
+                int time = (timeEnd - timeStart) == 0 ? 1 : (int)(timeEnd - timeStart);
+                int realSpeed = (1 / time) * 1000;
+                if (realSpeed > this.speed){
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(realSpeed - this.speed);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
