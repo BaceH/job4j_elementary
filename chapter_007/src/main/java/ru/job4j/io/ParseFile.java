@@ -25,16 +25,20 @@ public class ParseFile {
     }
 
     public synchronized String getContentWithoutUnicode() throws IOException {
-        InputStream i = new FileInputStream(file);
-        String output = "";
-        int data;
-        while ((data = i.read()) > 0) {
-            if (data < 0x80) {
-                output += (char) data;
-            }
-        }
-        i.close();
-        return output;
+        StringBuilder res = new StringBuilder();
+        getContent().chars()
+                .filter(item -> (item < 0x80)).forEach(res::append);
+        return res.toString();
+//        InputStream i = new FileInputStream(file);
+//        String output = "";
+//        int data;
+//        while ((data = i.read()) > 0) {
+//            if (data < 0x80) {
+//                output += (char) data;
+//            }
+//        }
+//        i.close();
+//        return output;
     }
 
     public synchronized void saveContent(String content) throws IOException {
