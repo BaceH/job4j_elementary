@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.util.function.Predicate;
 
 public class ParseFile {
     private File file;
@@ -13,39 +14,40 @@ public class ParseFile {
         return file;
     }
 
-    public synchronized String getContent() throws IOException {
-        InputStream i = new FileInputStream(file);
-        String output = "";
-        int data;
-        while ((data = i.read()) > 0) {
-            output += (char) data;
-        }
-        i.close();
-        return output;
+    public synchronized String getContent() {
+        Predicate<Integer> pred = i -> i > 0;
+        return getContent(pred);
     }
 
-    public synchronized String getContentWithoutUnicode() throws IOException {
-        StringBuilder res = new StringBuilder();
-        getContent().chars()
-                .filter(item -> (item < 0x80)).forEach(res::append);
-        return res.toString();
-//        InputStream i = new FileInputStream(file);
-//        String output = "";
-//        int data;
-//        while ((data = i.read()) > 0) {
-//            if (data < 0x80) {
-//                output += (char) data;
-//            }
-//        }
-//        i.close();
-//        return output;
+    public synchronized String getContentWithoutUnicode() {
+        Predicate<Integer> pred = i -> i  < 0x80;
+        return getContent(pred);
     }
 
-    public synchronized void saveContent(String content) throws IOException {
-        OutputStream o = new FileOutputStream(file);
-        for (int i = 0; i < content.length(); i += 1) {
-            o.write(content.charAt(i));
+    public synchronized String getContent(Predicate<Integer> pred) {
+        StringBuilder output = new StringBuilder();
+
+        try(InputStream i = new FileInputStream(file)) {
+            int data;
+            while ((data = i.read()) > 0) {
+                if(pred.test(data)) {
+                    output.append((char) data);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        o.close();
+
+        return output.toString();
+    }
+
+    public synchronized void saveContent(String content) {
+        try (OutputStream o = new FileOutputStream(file)) {
+            for (int i = 0; i < content.length(); i += 1) {
+                o.write(content.charAt(i));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
