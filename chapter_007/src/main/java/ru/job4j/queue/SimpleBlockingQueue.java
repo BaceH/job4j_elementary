@@ -59,4 +59,8 @@ public class SimpleBlockingQueue<T> {
         notifyAll();
         return res;
     }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
 }
