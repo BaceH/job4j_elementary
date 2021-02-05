@@ -11,7 +11,11 @@ public class Consumer<T> implements Runnable {
     public void run() {
         System.out.println("Consumer run");
         while (true) {
-            T i = simpleBlockingQueue.poll();
+            try {
+                T i = simpleBlockingQueue.poll();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

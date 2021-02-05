@@ -31,16 +31,16 @@ public class SimpleBlockingQueue<T> {
     }
 
     public synchronized void offer(T value) {
-            while (queue.size() == count) {
+        while (queue.size() == count) {
 
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+
+
+        }
         queue.add(value);
         System.out.println("offer: " + value);
         flag = true;
@@ -49,20 +49,14 @@ public class SimpleBlockingQueue<T> {
     }
 
 
-    public synchronized T poll() {
-            while (queue.size() == 0) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-            T res = queue.remove();
-        System.out.println("poll: " + res);
-            flag = false;
-            notifyAll();
-            return res;
+    public synchronized T poll() throws InterruptedException {
+        while (queue.size() == 0) {
+            wait();
         }
+        T res = queue.remove();
+        System.out.println("poll: " + res);
+        flag = false;
+        notifyAll();
+        return res;
+    }
 }
