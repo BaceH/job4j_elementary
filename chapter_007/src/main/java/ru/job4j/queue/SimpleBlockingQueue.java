@@ -13,18 +13,9 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
-    private int count = 1;
-
-    public synchronized void offer(T value) {
-        while (queue.size() == count) {
-
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
+    public synchronized void offer(T value) throws InterruptedException {
+        while (queue.size() == 1) {
+            wait();
         }
         queue.add(value);
         System.out.println("offer: " + value);
