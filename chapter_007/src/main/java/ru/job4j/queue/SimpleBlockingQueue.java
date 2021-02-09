@@ -9,12 +9,21 @@ import java.util.Queue;
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
 
-
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
+    public final int count;
+
+    public SimpleBlockingQueue() {
+        this.count = 1;
+    }
+
+    public SimpleBlockingQueue(int count) {
+        this.count = count;
+    }
+
     public synchronized void offer(T value) throws InterruptedException {
-        while (queue.size() == 1) {
+        while (queue.size() == count) {
             wait();
         }
         queue.add(value);
