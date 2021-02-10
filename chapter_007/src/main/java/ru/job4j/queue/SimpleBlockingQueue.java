@@ -6,6 +6,8 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static java.lang.Integer.MAX_VALUE;
+
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
 
@@ -15,7 +17,7 @@ public class SimpleBlockingQueue<T> {
     public final int count;
 
     public SimpleBlockingQueue() {
-        this.count = 1;
+        this.count = MAX_VALUE;
     }
 
     public SimpleBlockingQueue(int count) {
