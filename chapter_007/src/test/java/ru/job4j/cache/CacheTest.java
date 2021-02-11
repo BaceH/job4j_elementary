@@ -3,7 +3,6 @@ package ru.job4j.cache;
 
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class CacheTest {
@@ -14,8 +13,6 @@ public class CacheTest {
         Base base = new Base(1,1);
         base.setName("base 1");
         memory.add(base);
-
-
 
         assertEquals(memory.get(base.getId()).getName() , base.getName());
     }
@@ -42,7 +39,6 @@ public class CacheTest {
         base.setName("base 1");
         memory.add(base);
         memory.delete(base);
-        System.out.println(memory.get(base.getId()));
         assertNull(memory.get(base.getId()));
     }
 }
