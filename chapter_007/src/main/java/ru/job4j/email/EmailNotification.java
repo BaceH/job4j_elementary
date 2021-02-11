@@ -23,7 +23,7 @@ public class EmailNotification {
     }
 
     public void close(){
-        pool.isShutdown();
+        pool.shutdown();
     }
 
     public void send(String subject, String body, String email){
