@@ -10,22 +10,28 @@ public class ThreadPool {
     private final SimpleBlockingQueue<Runnable> tasks =
             new SimpleBlockingQueue<>(Runtime.getRuntime().availableProcessors());
 
-    public ThreadPool(){
-        for(int i = 0; i < Runtime.getRuntime().availableProcessors(); i++){
-            Thread thread = new Thread();
-            threads.add(thread);
+    public ThreadPool() {
+        for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
+            Thread thread = new Thread(new ThreadTask(tasks));
+            this.threads.add(thread);
+        }
+        for (Thread t : threads) {
+            t.start();
         }
     }
 
     public void work(Runnable job) throws InterruptedException {
-        tasks.offer(job);
-        threads.stream()
-                .filter(t -> t.getState().equals(Thread.State.WAITING))
-                .forEach(Object::notify);
-
+        this.tasks.offer(job);
     }
 
     public void shutdown() {
+        while (!this.tasks.isEmpty()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         threads.forEach(Thread::interrupt);
     }
 }
