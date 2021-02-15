@@ -2,7 +2,7 @@ package ru.job4j.cache;
 
 public class Base {
     private final int id;
-    private final int version;
+    private int version;
     private String name;
 
     public Base(int id, int version) {
@@ -16,6 +16,9 @@ public class Base {
 
     public int getVersion() {
         return version;
+    }
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public String getName() {
