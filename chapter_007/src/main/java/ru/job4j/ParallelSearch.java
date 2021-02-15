@@ -1,17 +1,17 @@
 package ru.job4j;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class ParallelSearch<T> extends RecursiveTask<Integer> {
 
-    private final ArrayList<T> array;
+    private final List<T> array;
     private final int from;
     private final int to;
     private final T element;
 
-    public ParallelSearch(ArrayList<T> array, int from, int to, T element) {
+    public ParallelSearch(List<T> array, int from, int to, T element) {
         this.array = array;
         this.from = from;
         this.to = to;
