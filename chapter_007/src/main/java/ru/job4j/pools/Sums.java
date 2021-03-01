@@ -8,6 +8,11 @@ public class Sums {
         return rowSum;
     }
 
+    public Sums(int rowSum, int colSum) {
+        this.rowSum = rowSum;
+        this.colSum = colSum;
+    }
+
     public void setRowSum(int rowSum) {
         this.rowSum = rowSum;
     }
